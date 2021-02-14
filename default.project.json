@@ -1,0 +1,65 @@
+{
+  "name": "project",
+  "tree": {
+     "$className": "DataModel",
+     "ReplicatedStorage": {
+        "$className": "ReplicatedStorage",
+        "$ignoreUnknownInstances": true,
+        "Nevermore": {
+           "$path": "libs/Nevermore"
+        }
+     },
+     "ServerScriptService": {
+        "$className": "ServerScriptService",
+        "$ignoreUnknownInstances": true,
+        "Modules": {
+           "$className": "Folder",
+            "Client": {
+               "$path": "src/Modules/Client"
+            },
+            "Server": {
+               "$path": "src/Modules/Server"
+            },
+            "Shared": {
+               "$path": "src/Modules/Shared",
+               "Flipper": {
+                  "$path": "libs/Flipper"
+               },
+               "Gizmo": {
+                  "$path": "libs/Gizmo"
+               },
+               "Roact": {
+                  "$path": "libs/Roact"
+               },
+               "RoactFlipper": {
+                  "$path": "libs/RoactFlipper"
+               }
+            },
+            "NevermoreEngine": {
+               "$path": "libs/NevermoreEngine"
+            }
+         },
+         "ServerInjection": {
+            "$path": "src/ServerInjection.server.lua"
+         }
+     },
+     "StarterPlayer": {
+        "$className": "StarterPlayer",
+        "StarterCharacterScripts": {
+           "$className": "StarterCharacterScripts",
+           "$ignoreUnknownInstances": true,
+           "CharacterInjection": {
+              "$path": "src/CharacterInjection.client.lua"
+           }
+        },
+        "StarterPlayerScripts": {
+           "$className": "StarterPlayerScripts",
+           "$ignoreUnknownInstances": true,
+           "PlayerInjection": {
+            "$path": "src/PlayerInjection.client.lua"
+            }
+        },
+        "$ignoreUnknownInstances": true
+     }
+  }
+}
