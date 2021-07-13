@@ -19,7 +19,7 @@ function StateStack.new()
 
 	self._stateStack = {}
 
-	self.Changed = self._state.Changed
+	self.Changed = self._state.Changed -- :Fire(newState)
 
 	return self
 end
@@ -35,7 +35,9 @@ function StateStack:PushState()
 	self:_updateState()
 
 	return function()
-		self:_popState(data)
+		if self.Destroy then
+			self:_popState(data)
+		end
 	end
 end
 

@@ -22,12 +22,12 @@ function ClientTranslatorFacade:Init()
 	localizationTable.Parent = LocalizationService
 
 	if RunService:IsStudio() then
-		PseudoLocalize.addToLocalizationTable(localizationTable, "qlp-pls", "en")
+		PseudoLocalize.addToLocalizationTable(localizationTable, nil, "en")
 	end
 
 	self._englishTranslator = localizationTable:GetTranslator("en")
 
-	local asyncTranslatorPromise = Promise.spawn(function(resolve, reject)
+	local asyncTranslatorPromise = Promise.defer(function(resolve, reject)
 		local translator = nil
 		local ok, err = pcall(function()
 			translator = LocalizationService:GetTranslatorForPlayerAsync(Players.LocalPlayer)

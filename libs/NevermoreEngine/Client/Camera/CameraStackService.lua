@@ -47,7 +47,7 @@ function CameraStackService:Init(doNotUseDefaultCamera)
 		end
 
 		local state = self:GetTopState()
-		if state and state ~= self._defaultCamera then
+		if state then
 			state:Set(Workspace.CurrentCamera)
 		end
 
@@ -56,6 +56,8 @@ function CameraStackService:Init(doNotUseDefaultCamera)
 end
 
 function CameraStackService:PushDisable()
+	assert(self._stack, "Not initialized")
+
 	local disabledKey = HttpService:GenerateGUID(false)
 
 	self._disabledSet[disabledKey] = true
@@ -78,22 +80,30 @@ end
 --- Returns the default camera
 -- @treturn SummedCamera DefaultCamera + ImpulseCamera
 function CameraStackService:GetDefaultCamera()
-	return self._defaultCamera or error()
+	assert(self._defaultCamera, "Not initialized")
+
+	return self._defaultCamera
 end
 
 --- Returns the impulse camera. Useful for adding camera shake
 -- @treturn ImpulseCamera
 function CameraStackService:GetImpulseCamera()
-	return self._impulseCamera or error()
+	assert(self._impulseCamera, "Not initialized")
+
+	return self._impulseCamera
 end
 
 --- Returns the default camera without any impulse cameras
 -- @treturn DefaultCamera
 function CameraStackService:GetRawDefaultCamera()
-	return self._rawDefaultCamera or error()
+	assert(self._rawDefaultCamera, "Not initialized")
+
+	return self._rawDefaultCamera
 end
 
 function CameraStackService:GetTopCamera()
+	assert(self._stack, "Not initialized")
+
 	return self._stack[#self._stack]
 end
 
@@ -139,7 +149,7 @@ function CameraStackService:GetNewStateBelow()
 				return self._stack[1].CameraState
 			end
 		else
-			warn("[CameraStackService] - Could not get state, returning default")
+			warn(("[CameraStackService] - Could not get state from %q, returning default"):format(tostring(_stateToUse)))
 			return self._stack[1].CameraState
 		end
 	end), function(newStateToUse)
@@ -162,6 +172,8 @@ function CameraStackService:GetIndex(state)
 end
 
 function CameraStackService:GetStack()
+	assert(self._stack, "Not initialized")
+
 	return self._stack
 end
 
